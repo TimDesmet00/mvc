@@ -17,6 +17,14 @@ class ArticleController
     private function getArticles()
     {
         // TODO: prepare the database connection (Préparez la connexion à la base de données)
+        try {
+            require './Controller/pdo.php';
+            $pdo = new PDO($db, $user, $pass);
+            echo 'Connexion réussie';
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo 'Erreur de connexion : ' . $e->getMessage();
+        }
         // Note: you might want to use a re-usable databaseManager class - the choice is yours (Remarque: vous voudrez peut-être utiliser une classe databaseManager réutilisable - le choix vous appartient)
         // TODO: fetch all articles as $rawArticles (as a simple array) (Récupérez tous les articles en tant que $rawArticles (sous forme de tableau simple))
         $rawArticles = [];
