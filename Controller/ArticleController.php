@@ -27,7 +27,7 @@ class ArticleController
         }
         // Note: you might want to use a re-usable databaseManager class - the choice is yours (Remarque: vous voudrez peut-être utiliser une classe databaseManager réutilisable - le choix vous appartient)
         // TODO: fetch all articles as $rawArticles (as a simple array) (Récupérez tous les articles en tant que $rawArticles (sous forme de tableau simple))
-        $rawArticles = [];
+        $rawArticles = [$pdo->query('SELECT * FROM article')->fetchAll()];
 
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
@@ -41,5 +41,6 @@ class ArticleController
     public function show()
     {
         // TODO: this can be used for a detail page (Cela peut être utilisé pour une page de détail)
+
     }
 }
