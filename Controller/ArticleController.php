@@ -18,7 +18,7 @@ class ArticleController
     {
         // TODO: prepare the database connection (Préparez la connexion à la base de données)
         try {
-            require './Controller/pdo.php';
+            require '../utils/pdo.php';
             $pdo = new PDO($db, $user, $pass);
             echo 'Connexion réussie';
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -41,6 +41,6 @@ class ArticleController
     public function show()
     {
         // TODO: this can be used for a detail page (Cela peut être utilisé pour une page de détail)
-
+        
     }
 }
