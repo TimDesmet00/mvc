@@ -1,6 +1,6 @@
 <?php
 
-class Pdo() {
+public class Pdo() {
     require './pdo.php';
     try {
         $pdo = new PDO($db, $user, $pass);
