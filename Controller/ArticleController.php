@@ -40,7 +40,29 @@ class ArticleController
 
     public function show()
     {
-        // TODO: this can be used for a detail page (Cela peut être utilisé pour une page de détail)
-        
+        // Get the article ID from the request parameters (Obtenez l'ID de l'article à partir des paramètres de la requête)
+        $articleId = $_GET['id'];
+
+        // Load all required data (Charger toutes les données requises)
+        $articles = $this->getArticles();
+
+        // Find the specific article based on the ID
+        $article = null;
+        foreach ($articles as $articleItem) {
+            if ($articleItem->getId() == $articleId) {
+                $article = $articleItem;
+                break;
+            }
+        }
+
+        // Display the article details
+        if ($article) {
+            echo 'Title: ' . $article->getTitle() . '<br>';
+            echo 'Description: ' . $article->getDescription() . '<br>';
+            echo 'Publish Date: ' . $article->getPublishDate() . '<br>';
+        } else {
+            echo 'Article not found';
+        }
     }
+        
 }

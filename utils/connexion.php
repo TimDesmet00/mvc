@@ -44,9 +44,9 @@ class orm() extends Pdo() {
         $stmt->execute(['id' => $id, 'title' => $title, 'description' => $description, 'publish_date' => $publish_date, 'id_author' => $id_author]);
     }
 
-    public function deleteArticle($id)
+    public function deleteArticle($table, $id)
     {
-        $sql = 'DELETE FROM article WHERE id = :id';
+        $sql = 'DELETE FROM $table WHERE id = :id';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
     }
