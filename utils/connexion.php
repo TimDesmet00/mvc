@@ -1,7 +1,7 @@
 <?php
 
-protected class Pdo() {
-    requiere 'utils/pdo.php';
+class Pdo() {
+    require './pdo.php';
     try {
         $pdo = new PDO($db, $user, $pass);
         echo 'Connexion réussie';

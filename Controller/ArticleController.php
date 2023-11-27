@@ -18,17 +18,25 @@ class ArticleController
     private function getArticles()
     {
         // TODO: prepare the database connection (Préparez la connexion à la base de données)
-
-        require '../utils/connexion.php';
-        $pdo = Pdo();
+        require './utils/pdo.php';
+        // require './utils/connexion.php';
+        // $pdo = Pdo();
+    try{
+        $pdo = new PDO($db, $user, $pass);
+        echo 'Connexion réussie';
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        echo 'Erreur de connexion : ' . $e->getMessage();
+    }
+        
         // Note: you might want to use a re-usable databaseManager class - the choice is yours (Remarque: vous voudrez peut-être utiliser une classe databaseManager réutilisable - le choix vous appartient)
         // TODO: fetch all articles as $rawArticles (as a simple array) (Récupérez tous les articles en tant que $rawArticles (sous forme de tableau simple))
-        $rawArticles = [$pdo->query('SELECT * FROM article')->fetchAll()];
-
+        $rawArticles = $pdo->query('SELECT * FROM articles')->fetchAll();
+        // print_r($rawArticles);
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
             // We are converting an article from a "dumb" array to a much more flexible class (Nous convertissons un article d'un tableau "dumb" à une classe beaucoup plus flexible)
-            $articles[] = new Article($rawArticle['id'], $rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
+            $articles[] = new Article($rawArticle['id'], $rawArticle['title'], $rawArticle['description'], $rawArticle['Publication-date'], $rawArticle['id_author']);
         }
 
         return $articles;
@@ -36,20 +44,20 @@ class ArticleController
 
     public function show()
 {
-    // // Get the article ID from the request parameters (Obtenez l'ID de l'article à partir des paramètres de la requête)
-    // $articleId = $_GET['id'];
+    // Get the article ID from the request parameters (Obtenez l'ID de l'article à partir des paramètres de la requête)
+    $articleId = $_GET['id'];
 
-    // // Load all required data (Charger toutes les données requises)
-    // $articles = $this->getArticles();
+    // Load all required data (Charger toutes les données requises)
+    $articles = $this->getArticles();
 
-    // // Find the specific article based on the ID
-    // $article = null;
-    // foreach ($articles as $articleItem) {
-    //     if ($articleItem->getId() == $articleId) {
-    //         $article = $articleItem;
-    //         break;
-    //     }
-    // }
+    // Find the specific article based on the ID
+    $article = null;
+    foreach ($articles as $articleItem) {
+        if ($articleItem->getId() == $articleId) {
+            $article = $articleItem;
+            break;
+        }
+    }
 
     // Display the article details
     if ($articles) {

@@ -19,7 +19,7 @@ $page = $_GET['page'] ?? null;
 // Load the controller (Charger le contrôleur)
 // It will *control* the rest of the work to load the page (Il *contrôlera* le reste du travail pour charger la page)
 switch ($page) {
-    
+    case 'articles':
     case 'articles-index':
         // This is shorthand for: (Ceci est un raccourci pour:)
         // $articleController = new ArticleController; (nouveau ArticleController;)
