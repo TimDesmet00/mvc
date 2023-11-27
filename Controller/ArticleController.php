@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types = 1);
+// require 'Model/Article.php';
+require '../utils/connexion.php';
 
 class ArticleController
 {
@@ -17,14 +19,17 @@ class ArticleController
     private function getArticles()
     {
         // TODO: prepare the database connection (Préparez la connexion à la base de données)
-        try {
-            require '../utils/pdo.php';
-            $pdo = new PDO($db, $user, $pass);
-            echo 'Connexion réussie';
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo 'Erreur de connexion : ' . $e->getMessage();
-        }
+
+        // premier test , deplacer dans utils/connection.php
+        // try {
+        //     require '../utils/pdo.php';
+        //     $pdo = new PDO($db, $user, $pass);
+        //     echo 'Connexion réussie';
+        //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // } catch (PDOException $e) {
+        //     echo 'Erreur de connexion : ' . $e->getMessage();
+        // }
+        $pdo = Pdo();
         // Note: you might want to use a re-usable databaseManager class - the choice is yours (Remarque: vous voudrez peut-être utiliser une classe databaseManager réutilisable - le choix vous appartient)
         // TODO: fetch all articles as $rawArticles (as a simple array) (Récupérez tous les articles en tant que $rawArticles (sous forme de tableau simple))
         $rawArticles = [$pdo->query('SELECT * FROM article')->fetchAll()];
@@ -32,7 +37,7 @@ class ArticleController
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
             // We are converting an article from a "dumb" array to a much more flexible class (Nous convertissons un article d'un tableau "dumb" à une classe beaucoup plus flexible)
-            $articles[] = new Article($rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
+            $articles[] = new Article($rawArticle['id'], $rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
         }
 
         return $articles;

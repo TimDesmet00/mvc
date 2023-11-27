@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 class Article
 {
+    
     public string $title;
     public ?string $description;
     public ?string $publishDate;
