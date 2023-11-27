@@ -2,7 +2,6 @@
 
 declare(strict_types = 1);
 // require 'Model/Article.php';
-require '../utils/connexion.php';
 
 class ArticleController
 {
@@ -29,6 +28,7 @@ class ArticleController
         // } catch (PDOException $e) {
         //     echo 'Erreur de connexion : ' . $e->getMessage();
         // }
+        require '../utils/connexion.php';
         $pdo = Pdo();
         // Note: you might want to use a re-usable databaseManager class - the choice is yours (Remarque: vous voudrez peut-être utiliser une classe databaseManager réutilisable - le choix vous appartient)
         // TODO: fetch all articles as $rawArticles (as a simple array) (Récupérez tous les articles en tant que $rawArticles (sous forme de tableau simple))
