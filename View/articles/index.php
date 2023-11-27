@@ -1,7 +1,9 @@
 <?php require 'View/includes/header.php'?>
 
 <?php  // Use any data loaded in the controller here
-// require '../../controller/ArticleController.php'  ?>
+require '../../controller/ArticleController.php'
+show()
+?>
 
 <section>
     <h1>Articles</h1>

@@ -19,15 +19,6 @@ class ArticleController
     {
         // TODO: prepare the database connection (Préparez la connexion à la base de données)
 
-        // premier test , deplacer dans utils/connection.php
-        // try {
-        //     require '../utils/pdo.php';
-        //     $pdo = new PDO($db, $user, $pass);
-        //     echo 'Connexion réussie';
-        //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // } catch (PDOException $e) {
-        //     echo 'Erreur de connexion : ' . $e->getMessage();
-        // }
         require '../utils/connexion.php';
         $pdo = Pdo();
         // Note: you might want to use a re-usable databaseManager class - the choice is yours (Remarque: vous voudrez peut-être utiliser une classe databaseManager réutilisable - le choix vous appartient)
@@ -44,30 +35,30 @@ class ArticleController
     }
 
     public function show()
-    {
-        // Get the article ID from the request parameters (Obtenez l'ID de l'article à partir des paramètres de la requête)
-        $articleId = $_GET['id'];
+{
+    // // Get the article ID from the request parameters (Obtenez l'ID de l'article à partir des paramètres de la requête)
+    // $articleId = $_GET['id'];
 
-        // Load all required data (Charger toutes les données requises)
-        $articles = $this->getArticles();
+    // // Load all required data (Charger toutes les données requises)
+    // $articles = $this->getArticles();
 
-        // Find the specific article based on the ID
-        $article = null;
-        foreach ($articles as $articleItem) {
-            if ($articleItem->getId() == $articleId) {
-                $article = $articleItem;
-                break;
-            }
-        }
+    // // Find the specific article based on the ID
+    // $article = null;
+    // foreach ($articles as $articleItem) {
+    //     if ($articleItem->getId() == $articleId) {
+    //         $article = $articleItem;
+    //         break;
+    //     }
+    // }
 
-        // Display the article details
-        if ($article) {
-            echo 'Title: ' . $article->getTitle() . '<br>';
-            echo 'Description: ' . $article->getDescription() . '<br>';
-            echo 'Publish Date: ' . $article->getPublishDate() . '<br>';
-        } else {
-            echo 'Article not found';
-        }
+    // Display the article details
+    if ($articles) {
+        // Load the view (Charger la vue)
+        require 'View/articles/index.php';
+    } else {
+        echo 'Article not found';
     }
+}
         
 }
+
